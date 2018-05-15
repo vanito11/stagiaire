@@ -24,7 +24,7 @@ import com.upf.stagiaire.model.UserRequest;
 import com.upf.stagiaire.service.UserService;
 
 /**
- * Created by fan.jin on 2016-10-15.
+ *
  */
 
 @RestController
@@ -73,7 +73,6 @@ public class UserController {
    * sure that the user has role "ROLE_USER" to access this endpoint.
    */
   @RequestMapping("/whoami")
-  @PreAuthorize("hasRole('USER')")
   public User user() {
     return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
   }
