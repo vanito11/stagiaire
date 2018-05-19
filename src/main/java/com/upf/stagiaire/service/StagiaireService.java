@@ -3,6 +3,7 @@ package com.upf.stagiaire.service;
 import java.util.List;
 
 import com.upf.stagiaire.model.Stagiaire;
+import com.upf.stagiaire.model.UserRequest;
 
 /**
  * Service Interface for managing Stagiaire.
@@ -38,4 +39,6 @@ public interface StagiaireService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    Stagiaire signupStagaiare(UserRequest userRequest);
 }

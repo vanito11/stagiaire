@@ -18,4 +18,6 @@ public interface UserService {
   List<User> findAll();
 
   User save(UserRequest user);
+
+    User register(User user);
 }

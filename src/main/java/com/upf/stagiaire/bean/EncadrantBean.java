@@ -17,7 +17,7 @@ public class EncadrantBean implements Serializable {
     
     private String telephone;
     
-    private String emil;
+    private String email;
     
     private String password;
     
@@ -69,12 +69,12 @@ public class EncadrantBean implements Serializable {
         this.telephone = telephone;
     }
     
-    public String getEmil() {
-        return emil;
+    public String getEmail() {
+        return email;
     }
     
-    public void setEmil(String emil) {
-        this.emil = emil;
+    public void setEmail(String email) {
+        this.email = email;
     }
     
     public String getPassword() {
