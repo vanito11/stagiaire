@@ -78,6 +78,20 @@ public class EncadrantServiceImpl implements EncadrantService {
     }
     
     /**
+     * Get one encadrant by id.
+     *
+     * @param id
+     *            the id of the entity
+     * @return the entity
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Encadrant findByEmail(String email) {
+        log.debug("Request to get Encadrant : {}", email);
+        return encadrantRepository.findByEmail(email);
+    }
+    
+    /**
      * Delete the encadrant by id.
      *
      * @param id

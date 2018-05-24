@@ -44,4 +44,6 @@ public interface EncadrantService {
     void delete(Long id);
     
     Encadrant signupEncadrant(UserRequest userRequest);
+
+    Encadrant findByEmail(String email);
 }
