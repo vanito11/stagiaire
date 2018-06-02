@@ -12,8 +12,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +38,7 @@ import com.upf.stagiaire.service.UserService;
 
 @RestController
 @RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
+
 public class UserController {
     
     @Autowired
@@ -75,6 +78,7 @@ public class UserController {
     }
     
     @RequestMapping(method = POST, value = "/signup")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> addUser(@RequestBody UserRequest userRequest,
             UriComponentsBuilder ucBuilder) {
         

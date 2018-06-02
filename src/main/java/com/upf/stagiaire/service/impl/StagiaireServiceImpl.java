@@ -1,16 +1,16 @@
 package com.upf.stagiaire.service.impl;
 
-import com.upf.stagiaire.service.StagiaireService;
-import com.upf.stagiaire.model.Stagiaire;
-import com.upf.stagiaire.model.Tuteur;
-import com.upf.stagiaire.model.UserRequest;
-import com.upf.stagiaire.repository.StagiaireRepository;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import com.upf.stagiaire.model.Stagiaire;
+import com.upf.stagiaire.model.UserRequest;
+import com.upf.stagiaire.repository.StagiaireRepository;
+import com.upf.stagiaire.service.StagiaireService;
 
 /**
  * Service Implementation for managing Stagiaire.
@@ -62,6 +62,19 @@ public class StagiaireServiceImpl implements StagiaireService {
         log.debug("Request to get all Stagiaires");
         return stagiaireRepository.findAll();
     }
+    
+    /**
+     * Get all the stagiaires.
+     *
+     * @return the list of entities
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<Stagiaire> findByStageId(Long id) {
+        log.debug("Request to get all Stagiaires");
+		return stagiaireRepository.findByStageId(id);
+    }
+    
     
     /**
      * Get one stagiaire by id.

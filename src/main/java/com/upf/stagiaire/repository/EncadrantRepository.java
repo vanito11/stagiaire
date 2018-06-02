@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.*;
  */
 @Repository
 public interface EncadrantRepository extends JpaRepository<Encadrant, Long> {
-    
-    Encadrant findByEmail(String Email);
+
+	Encadrant findByEmail(String Email);
+
 }

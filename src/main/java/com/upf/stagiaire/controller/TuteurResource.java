@@ -28,7 +28,7 @@ import com.upf.stagiaire.util.HeaderUtil;
  */
 @RestController
 @RequestMapping("/api")
-@CrossOrigin("*")
+
 public class TuteurResource {
     
     private final Logger log = LoggerFactory.getLogger(TuteurResource.class);

@@ -67,15 +67,14 @@ public class Stage implements Serializable {
     @ManyToOne
     private Type type;
     
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-        name = "stage_stagiaire", 
-        joinColumns = { @JoinColumn(name = "id_stage") }, 
-        inverseJoinColumns = { @JoinColumn(name = "id_stagiaire") }
-    )
-    private  Set<Stagiaire> stagiaire = new HashSet<>();
+//    @ManyToMany(cascade = { CascadeType.ALL })
+//    @JoinTable(
+//        name = "stagestagiaire",
+//        joinColumns = { @JoinColumn(name = "stage_id") }, 
+//        inverseJoinColumns = { @JoinColumn(name = "stagiaire_id") }
+//    )
+//    private  Set<Stagiaire> stagiaire = new HashSet<>();
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -324,7 +323,6 @@ public class Stage implements Serializable {
     public void setType(Type type) {
         this.type = type;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {

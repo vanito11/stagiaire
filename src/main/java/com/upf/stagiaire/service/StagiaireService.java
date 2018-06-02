@@ -41,4 +41,6 @@ public interface StagiaireService {
     void delete(Long id);
 
     Stagiaire signupStagaiare(UserRequest userRequest);
+
+	List<Stagiaire> findByStageId(Long id);
 }

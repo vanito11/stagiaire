@@ -49,6 +49,9 @@ public class User implements UserDetails, Serializable {
     @Column(name = "role")
     private String role;
     
+    @Column
+    private int actif;
+    
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_authority",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),

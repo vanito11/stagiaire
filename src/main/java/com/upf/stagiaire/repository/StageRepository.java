@@ -4,8 +4,9 @@ import org.springframework.stereotype.Repository;
 
 import com.upf.stagiaire.model.Stage;
 
-import org.springframework.data.jpa.repository.*;
+import java.util.List;
 
+import org.springframework.data.jpa.repository.*;
 
 /**
  * Spring Data JPA repository for the Stage entity.
@@ -14,4 +15,7 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface StageRepository extends JpaRepository<Stage, Long> {
 
+	List<Stage> findByEncadrantId(Long encadrentId);
+
+	List<Stage> findByEncadrantNom(String encadrentNom);
 }

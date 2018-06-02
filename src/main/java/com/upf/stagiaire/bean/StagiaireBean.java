@@ -3,6 +3,8 @@ package com.upf.stagiaire.bean;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.upf.stagiaire.model.Filiere;
+
 
 
 public class StagiaireBean implements Serializable {
@@ -40,9 +42,24 @@ public class StagiaireBean implements Serializable {
 
 
     private String cv;
+    
+ private Filiere filiere;
 
 
-    public Long getId() {
+ 
+
+
+	public Filiere getFiliere() {
+		return filiere;
+	}
+
+
+	public void setFiliere(Filiere filiere) {
+		this.filiere = filiere;
+	}
+
+
+	public Long getId() {
         return id;
     }
 

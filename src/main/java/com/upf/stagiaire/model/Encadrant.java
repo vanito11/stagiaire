@@ -47,7 +47,6 @@ public class Encadrant implements Serializable {
     @JsonIgnore
     private Set<Stage> stages = new HashSet<>();
     
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
