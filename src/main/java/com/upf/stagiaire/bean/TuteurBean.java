@@ -3,6 +3,8 @@ package com.upf.stagiaire.bean;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.upf.stagiaire.model.Entreprise;
+
 
 
 public class TuteurBean implements Serializable {
@@ -30,8 +32,19 @@ public class TuteurBean implements Serializable {
 
     private String password;
 
+    private Entreprise entreprise;
 
-    public Long getId() {
+    public Entreprise getEntreprise() {
+		return entreprise;
+	}
+
+
+	public void setEntreprise(Entreprise entreprise) {
+		this.entreprise = entreprise;
+	}
+
+
+	public Long getId() {
         return id;
     }
 

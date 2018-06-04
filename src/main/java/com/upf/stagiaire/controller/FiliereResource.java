@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
+import com.upf.stagiaire.bean.FiliereBean;
 import com.upf.stagiaire.exception.BadRequestAlertException;
+import com.upf.stagiaire.mapper.FiliereMapper;
 import com.upf.stagiaire.model.Filiere;
 import com.upf.stagiaire.service.FiliereService;
 import com.upf.stagiaire.util.HeaderUtil;
@@ -28,14 +31,18 @@ import com.upf.stagiaire.util.HeaderUtil;
  */
 @RestController
 @RequestMapping("/api")
-
+@CrossOrigin("*")
 public class FiliereResource {
     
     private final Logger log = LoggerFactory.getLogger(FiliereResource.class);
     
     private static final String ENTITY_NAME = "filiere";
     
+    @Autowired
     private final FiliereService filiereService;
+    
+    @Autowired
+    private FiliereMapper filiereMapper;
     
     public FiliereResource(FiliereService filiereService) {
         this.filiereService = filiereService;
@@ -76,7 +83,6 @@ public class FiliereResource {
      *             if the Location URI syntax is incorrect
      */
     @PutMapping("/filieres")
-    @Timed
     public ResponseEntity<Filiere> updateFiliere(@RequestBody Filiere filiere) throws URISyntaxException {
         log.debug("REST request to update Filiere : {}", filiere);
         if (filiere.getId() == null) {
@@ -87,6 +93,19 @@ public class FiliereResource {
                 .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, filiere.getId().toString()))
                 .body(result);
     }
+    
+    @PutMapping("/filieres/update/{id}")
+	public void updateFiliere(@PathVariable Long id, @RequestBody FiliereBean request) throws URISyntaxException {
+		log.debug("REST request to update Stagiaire : {}", request);
+		if (request != null) {
+			Filiere st = filiereService.findOne(id);
+			if (st != null) {
+				st = filiereMapper.map(request, Filiere.class);
+				filiereService.save(st);
+			}
+		}
+
+	}
     
     /**
      * GET /filieres : get all the filieres.

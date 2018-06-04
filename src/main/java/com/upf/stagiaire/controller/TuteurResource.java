@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,7 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
+import com.upf.stagiaire.bean.FiliereBean;
+import com.upf.stagiaire.bean.TuteurBean;
 import com.upf.stagiaire.exception.BadRequestAlertException;
+import com.upf.stagiaire.mapper.TuteurMapper;
+import com.upf.stagiaire.model.Filiere;
 import com.upf.stagiaire.model.Tuteur;
 import com.upf.stagiaire.service.TuteurService;
 import com.upf.stagiaire.util.HeaderUtil;
@@ -35,7 +40,11 @@ public class TuteurResource {
     
     private static final String ENTITY_NAME = "tuteur";
     
+    @Autowired
     private final TuteurService tuteurService;
+    
+    @Autowired
+    private TuteurMapper tuteurMapper;
     
     public TuteurResource(TuteurService tuteurService) {
         this.tuteurService = tuteurService;
@@ -88,6 +97,18 @@ public class TuteurResource {
                 .body(result);
     }
     
+    @PutMapping("/tuteurs/update/{id}")
+	public void updateTuteur(@PathVariable Long id, @RequestBody TuteurBean request) throws URISyntaxException {
+		log.debug("REST request to update Stagiaire : {}", request);
+		if (request != null) {
+			Tuteur st = tuteurService.findOne(id);
+			if (st != null) {
+				st = tuteurMapper.map(request, Tuteur.class);
+				tuteurService.save(st);
+			}
+		}
+
+	}
     /**
      * GET /tuteurs : get all the tuteurs.
      *

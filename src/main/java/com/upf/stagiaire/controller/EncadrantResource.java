@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
+import com.upf.stagiaire.bean.EncadrantBean;
 import com.upf.stagiaire.bean.StageSatagiaireBean;
 import com.upf.stagiaire.exception.BadRequestAlertException;
+import com.upf.stagiaire.mapper.EncadrantMapper;
 import com.upf.stagiaire.model.Encadrant;
 import com.upf.stagiaire.model.Stage;
 import com.upf.stagiaire.service.EncadrantService;
@@ -33,7 +36,7 @@ import com.upf.stagiaire.util.HeaderUtil;
  */
 @RestController
 @RequestMapping("/api")
-
+@CrossOrigin("*")
 public class EncadrantResource {
 
 	private final Logger log = LoggerFactory.getLogger(EncadrantResource.class);
@@ -42,12 +45,16 @@ public class EncadrantResource {
 
 	@Autowired
 	private EncadrantService encadrantService;
+	
+	@Autowired
+	private EncadrantMapper encadrantMapper;
 
 	@Autowired
 	private StageService stageService;
 
 	@Autowired
 	private StagiaireService stagiaireService;
+
 
 	/**
 	 * POST /encadrants : Create a new encadrant.
@@ -84,15 +91,20 @@ public class EncadrantResource {
 	 * @throws URISyntaxException
 	 *             if the Location URI syntax is incorrect
 	 */
-	@PutMapping("/encadrants")
-	public ResponseEntity<Encadrant> updateEncadrant(@RequestBody Encadrant encadrant) throws URISyntaxException {
-		log.debug("REST request to update Encadrant : {}", encadrant);
-		if (encadrant.getId() == null) {
-			return createEncadrant(encadrant);
+
+	
+
+	@PutMapping("/encadrants/update/{id}")
+	public void updateEncadrant(@PathVariable Long id, @RequestBody EncadrantBean request) throws URISyntaxException {
+		log.debug("REST request to update Stagiaire : {}", request);
+		if (request != null) {
+			Encadrant st = encadrantService.findOne(id);
+			if (st != null) {
+				st = encadrantMapper.map(request, Encadrant.class);
+				encadrantService.save(st);
+			}
 		}
-		Encadrant result = encadrantService.save(encadrant);
-		return ResponseEntity.ok()
-				.headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, encadrant.getId().toString())).body(result);
+
 	}
 
 	/**

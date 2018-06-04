@@ -38,7 +38,7 @@ public class Stagiaire implements Serializable {
 	private String prenom;
 
 	@Column(name = "date_naissance")
-	private Date dateNaissance;
+	private String dateNaissance;
 
 	@Column(name = "nationnalite")
 	private String nationnalite;
@@ -105,16 +105,16 @@ public class Stagiaire implements Serializable {
 		this.prenom = prenom;
 	}
 
-	public Date getDateNaissance() {
+	public String getDateNaissance() {
 		return dateNaissance;
 	}
 
-	public Stagiaire dateNaissance(Date dateNaissance) {
+	public Stagiaire dateNaissance(String dateNaissance) {
 		this.dateNaissance = dateNaissance;
 		return this;
 	}
 
-	public void setDateNaissance(Date dateNaissance) {
+	public void setDateNaissance(String dateNaissance) {
 		this.dateNaissance = dateNaissance;
 	}
 

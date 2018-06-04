@@ -63,6 +63,7 @@ public class StagiaireResource {
 	 */
 	@PostMapping("/stagiaires")
 	public ResponseEntity<Stagiaire> createStagiaire(@RequestBody Stagiaire stagiaire) throws URISyntaxException {
+
 		log.debug("REST request to save Stagiaire : {}", stagiaire);
 		if (stagiaire.getId() != null) {
 			throw new BadRequestAlertException("A new stagiaire cannot already have an ID", ENTITY_NAME, "idexists");

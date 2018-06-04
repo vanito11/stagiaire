@@ -18,7 +18,7 @@ public class StagiaireBean implements Serializable {
 
     private String prenom;
 
-    private Date dateNaissance;
+    private String dateNaissance;
 
     private String nationnalite;
 
@@ -89,12 +89,12 @@ public class StagiaireBean implements Serializable {
     }
 
 
-    public Date getDateNaissance() {
+    public String getDateNaissance() {
         return dateNaissance;
     }
 
 
-    public void setDateNaissance(Date dateNaissance) {
+    public void setDateNaissance(String dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
 

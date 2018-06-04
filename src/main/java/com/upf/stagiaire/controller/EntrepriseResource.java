@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
+import com.upf.stagiaire.bean.EncadrantBean;
+import com.upf.stagiaire.bean.EntrepriseBean;
 import com.upf.stagiaire.exception.BadRequestAlertException;
+import com.upf.stagiaire.mapper.EntrepriseMapper;
+import com.upf.stagiaire.model.Encadrant;
 import com.upf.stagiaire.model.Entreprise;
 import com.upf.stagiaire.service.EntrepriseService;
 import com.upf.stagiaire.util.HeaderUtil;
@@ -33,7 +38,11 @@ public class EntrepriseResource {
     
     private static final String ENTITY_NAME = "entreprise";
     
-    private final EntrepriseService entrepriseService;
+    @Autowired
+    private EntrepriseService entrepriseService;
+    
+    @Autowired
+    private EntrepriseMapper entrepriseMapper;
     
     public EntrepriseResource(EntrepriseService entrepriseService) {
         this.entrepriseService = entrepriseService;
@@ -85,6 +94,20 @@ public class EntrepriseResource {
                 .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, entreprise.getId().toString()))
                 .body(result);
     }
+    
+    
+	@PutMapping("/entreprises/update/{id}")
+	public void updateEntreprise(@PathVariable Long id, @RequestBody EntrepriseBean request) throws URISyntaxException {
+		log.debug("REST request to update Stagiaire : {}", request);
+		if (request != null) {
+			Entreprise st = entrepriseService.findOne(id);
+			if (st != null) {
+				st = entrepriseMapper.map(request, Entreprise.class);
+				entrepriseService.save(st);
+			}
+		}
+
+	}
     
     /**
      * GET /entreprises : get all the entreprises.
