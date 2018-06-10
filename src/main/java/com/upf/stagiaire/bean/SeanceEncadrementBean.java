@@ -1,7 +1,7 @@
 package com.upf.stagiaire.bean;
 
 import java.io.Serializable;
-import java.util.Date;
+
 
 
 
@@ -12,7 +12,7 @@ public class SeanceEncadrementBean implements Serializable {
 
     private Long id;
 
-    private Date dateEncadrement;
+    private String dateEncadrement;
 
     private String description;
 
@@ -24,11 +24,11 @@ public class SeanceEncadrementBean implements Serializable {
         this.id = id;
     }
 
-    public Date getDateEncadrement() {
+    public String getDateEncadrement() {
         return dateEncadrement;
     }
 
-    public void setDateEncadrement(Date dateEncadrement) {
+    public void setDateEncadrement(String dateEncadrement) {
         this.dateEncadrement = dateEncadrement;
     }
 

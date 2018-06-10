@@ -3,6 +3,9 @@ package com.upf.stagiaire.repository;
 import org.springframework.stereotype.Repository;
 
 import com.upf.stagiaire.model.Message;
+import com.upf.stagiaire.model.Visite;
+
+import java.util.List;
 
 import org.springframework.data.jpa.repository.*;
 
@@ -13,5 +16,7 @@ import org.springframework.data.jpa.repository.*;
 @SuppressWarnings("unused")
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Long> {
+	
+	   List<Message> findMessageByStageId(Long id);
 
 }

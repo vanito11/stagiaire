@@ -2,6 +2,7 @@ package com.upf.stagiaire.service;
 
 import java.util.List;
 
+import com.upf.stagiaire.bean.StageSatagiaireBean;
 import com.upf.stagiaire.model.Stage;
 
 /**
@@ -40,4 +41,5 @@ public interface StageService {
     void delete(Long id);
 
 	List<Stage> findStageByEncadrantId(Long encadrantId);
+
 }

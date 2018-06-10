@@ -2,6 +2,7 @@ package com.upf.stagiaire.service;
 
 import java.util.List;
 
+import com.upf.stagiaire.bean.StageSatagiaireBean;
 import com.upf.stagiaire.model.Stagiaire;
 import com.upf.stagiaire.model.UserRequest;
 
@@ -42,5 +43,9 @@ public interface StagiaireService {
 
     Stagiaire signupStagaiare(UserRequest userRequest);
 
-	List<Stagiaire> findByStageId(Long id);
+    List<Stagiaire> findByStageId(Long id);
+	
+
+	
+	
 }

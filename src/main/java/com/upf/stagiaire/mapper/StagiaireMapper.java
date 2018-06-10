@@ -3,7 +3,6 @@ package com.upf.stagiaire.mapper;
 import org.springframework.stereotype.Component;
 
 import com.upf.stagiaire.bean.StagiaireBean;
-import com.upf.stagiaire.model.Filiere;
 import com.upf.stagiaire.model.Stagiaire;
 
 import ma.glasnost.orika.MapperFactory;

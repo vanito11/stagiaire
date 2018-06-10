@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.upf.stagiaire.bean.StageSatagiaireBean;
 import com.upf.stagiaire.model.Stagiaire;
 import com.upf.stagiaire.model.UserRequest;
 import com.upf.stagiaire.repository.StagiaireRepository;
@@ -101,4 +102,6 @@ public class StagiaireServiceImpl implements StagiaireService {
         log.debug("Request to delete Stagiaire : {}", id);
         stagiaireRepository.delete(id);
     }
+
+
 }

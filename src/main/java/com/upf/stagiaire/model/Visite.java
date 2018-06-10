@@ -20,7 +20,7 @@ public class Visite implements Serializable {
     private Long id;
 
     @Column(name = "jhi_date")
-    private Date date;
+    private String date;
 
     @Column(name = "description")
     private String description;
@@ -37,16 +37,16 @@ public class Visite implements Serializable {
         this.id = id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public Visite date(Date date) {
+    public Visite date(String date) {
         this.date = date;
         return this;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

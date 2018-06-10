@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
+import com.upf.stagiaire.bean.DocumentBean;
 import com.upf.stagiaire.exception.BadRequestAlertException;
+import com.upf.stagiaire.mapper.DocumentMapper;
 import com.upf.stagiaire.model.Document;
 import com.upf.stagiaire.service.DocumentService;
 import com.upf.stagiaire.util.HeaderUtil;
@@ -34,8 +36,13 @@ public class DocumentResource {
     private final Logger log = LoggerFactory.getLogger(DocumentResource.class);
 
     private static final String ENTITY_NAME = "document";
-
-    private final DocumentService documentService;
+    @Autowired
+    private DocumentService documentService;
+    
+    @Autowired
+    private DocumentMapper documentMapper;
+    
+    private List<Document> document;
 
     public DocumentResource(DocumentService documentService) {
         this.documentService = documentService;
@@ -82,6 +89,15 @@ public class DocumentResource {
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, document.getId().toString()))
             .body(result);
     }
+    
+    @PutMapping("/documents/update/{id}")
+	public void updateDocument(@PathVariable Long id, @RequestBody Document request) throws URISyntaxException {
+
+				documentService.save(request);
+		
+
+
+	}
 
     /**
      * GET  /documents : get all the documents.
@@ -109,6 +125,13 @@ public class DocumentResource {
         return document;
     }
 
+    @GetMapping("/stages/documents/{id}")
+    @Timed
+    public List<Document> getDocumentStageById(@PathVariable Long id) {
+        log.debug("REST request to get Document : {}", id);
+        document = documentService.findDocumentByStageId(id);
+        return document;
+    }
     /**
      * DELETE  /documents/:id : delete the "id" document.
      *

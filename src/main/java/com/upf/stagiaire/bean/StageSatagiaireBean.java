@@ -1,5 +1,7 @@
 package com.upf.stagiaire.bean;
 
+
+
 import java.util.List;
 
 import com.upf.stagiaire.model.Stage;
@@ -36,5 +38,9 @@ public class StageSatagiaireBean {
 	public void setStagiaireBean(List<Stagiaire> stagiaireBean) {
 		this.stagiaireBean = stagiaireBean;
 	}
+
+	
+
+
 
 }

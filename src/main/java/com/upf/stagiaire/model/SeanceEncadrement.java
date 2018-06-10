@@ -21,7 +21,7 @@ public class SeanceEncadrement implements Serializable {
     private Long id;
 
     @Column(name = "date_encadrement")
-    private Date dateEncadrement;
+    private String dateEncadrement;
 
     @Column(name = "description")
     private String description;
@@ -38,16 +38,16 @@ public class SeanceEncadrement implements Serializable {
         this.id = id;
     }
 
-    public Date getDateEncadrement() {
+    public String getDateEncadrement() {
         return dateEncadrement;
     }
 
-    public SeanceEncadrement dateEncadrement(Date dateEncadrement) {
+    public SeanceEncadrement dateEncadrement(String dateEncadrement) {
         this.dateEncadrement = dateEncadrement;
         return this;
     }
 
-    public void setDateEncadrement(Date dateEncadrement) {
+    public void setDateEncadrement(String dateEncadrement) {
         this.dateEncadrement = dateEncadrement;
     }
 

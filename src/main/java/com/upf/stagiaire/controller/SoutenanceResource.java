@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
+import com.upf.stagiaire.bean.SoutenanceBean;
 import com.upf.stagiaire.exception.BadRequestAlertException;
+import com.upf.stagiaire.mapper.SoutenanceMapper;
 import com.upf.stagiaire.model.Soutenance;
 import com.upf.stagiaire.service.SoutenanceService;
 import com.upf.stagiaire.util.HeaderUtil;
@@ -34,8 +36,12 @@ public class SoutenanceResource {
     private final Logger log = LoggerFactory.getLogger(SoutenanceResource.class);
     
     private static final String ENTITY_NAME = "soutenance";
+    @Autowired
+    private SoutenanceService soutenanceService;
+    @Autowired
+    private SoutenanceMapper soutenanceMapper;
     
-    private final SoutenanceService soutenanceService;
+    private List<Soutenance> soutenance;
     
     public SoutenanceResource(SoutenanceService soutenanceService) {
         this.soutenanceService = soutenanceService;
@@ -88,6 +94,12 @@ public class SoutenanceResource {
                 .body(result);
     }
     
+    @PutMapping("/soutenances/update/{id}")
+	public void updateSoutenance(@PathVariable Long id, @RequestBody Soutenance request) throws URISyntaxException {
+
+				soutenanceService.save(request);
+
+	}
     /**
      * GET /soutenances : get all the soutenances.
      *
@@ -115,6 +127,15 @@ public class SoutenanceResource {
         return soutenance;
     }
     
+    
+    @GetMapping("/stages/soutenances/{id}")
+    @Timed
+    public List<Soutenance> getSoutenancesStageById(@PathVariable Long id) {
+        log.debug("REST request to get soutenance : {}", id);
+        soutenance = soutenanceService.findSoutenanceByStageId(id);
+
+        return soutenance;
+    }
     /**
      * DELETE /soutenances/:id : delete the "id" soutenance.
      *

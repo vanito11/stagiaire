@@ -4,7 +4,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import javax.persistence.Access;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
+import com.upf.stagiaire.bean.StageSatagiaireBean;
 import com.upf.stagiaire.bean.StagiaireBean;
 import com.upf.stagiaire.exception.BadRequestAlertException;
 import com.upf.stagiaire.mapper.StagiaireMapper;
@@ -127,6 +127,8 @@ public class StagiaireResource {
 		Stagiaire stagiaire = stagiaireService.findOne(id);
 		return stagiaire;
 	}
+
+
 
 	/**
 	 * DELETE /stagiaires/:id : delete the "id" stagiaire.

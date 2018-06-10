@@ -38,4 +38,6 @@ public interface MessageService {
      * @param id the id of the entity
      */
     void delete(Long id);
+    
+    List<Message> findMessageByStageId(Long id);
 }

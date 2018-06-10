@@ -1,6 +1,7 @@
 package com.upf.stagiaire.service.impl;
 
 import com.upf.stagiaire.service.StageService;
+import com.upf.stagiaire.bean.StageSatagiaireBean;
 import com.upf.stagiaire.model.Stage;
 import com.upf.stagiaire.repository.StageRepository;
 import org.slf4j.Logger;
@@ -69,6 +70,9 @@ public class StageServiceImpl implements StageService {
 	public List<Stage> findStageByEncadrantId(Long encadrantId) {
 		return stageRepository.findByEncadrantId(encadrantId);
 	}
+	
+	
+
 
 	/**
 	 * Delete the stage by id.

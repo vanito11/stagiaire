@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
+import com.upf.stagiaire.bean.VisiteBean;
 import com.upf.stagiaire.exception.BadRequestAlertException;
+import com.upf.stagiaire.mapper.VisiteMapper;
 import com.upf.stagiaire.model.Visite;
 import com.upf.stagiaire.service.VisiteService;
 import com.upf.stagiaire.util.HeaderUtil;
@@ -34,8 +36,12 @@ public class VisiteResource {
     private final Logger log = LoggerFactory.getLogger(VisiteResource.class);
     
     private static final String ENTITY_NAME = "visite";
+    @Autowired
+    private VisiteService visiteService;
+    private List<Visite> visite;
+    @Autowired
+    private VisiteMapper visiteMapper;
     
-    private final VisiteService visiteService;
     
     public VisiteResource(VisiteService visiteService) {
         this.visiteService = visiteService;
@@ -88,6 +94,15 @@ public class VisiteResource {
                 .body(result);
     }
     
+    
+    @PutMapping("/visites/update/{id}")
+	public void updateVisites(@PathVariable Long id, @RequestBody Visite request) throws URISyntaxException {
+
+				visiteService.save(request);
+
+
+	}
+    
     /**
      * GET /visites : get all the visites.
      *
@@ -115,13 +130,14 @@ public class VisiteResource {
         return visite;
     }
     
-    /**
-     * DELETE /visites/:id : delete the "id" visite.
-     *
-     * @param id
-     *            the id of the visite to delete
-     * @return the ResponseEntity with status 200 (OK)
-     */
+    @GetMapping("/stages/visites/{id}")
+    @Timed
+    public List<Visite> getSVisiteStageById(@PathVariable Long id) {
+        log.debug("REST request to get Visite : {}", id);
+        visite = visiteService.findVisiteByStageId(id);
+        return visite;
+    }
+
     @DeleteMapping("/visites/{id}")
     @Timed
     public ResponseEntity<Void> deleteVisite(@PathVariable Long id) {

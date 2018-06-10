@@ -18,11 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
-import com.upf.stagiaire.bean.EncadrantBean;
 import com.upf.stagiaire.bean.EntrepriseBean;
 import com.upf.stagiaire.exception.BadRequestAlertException;
 import com.upf.stagiaire.mapper.EntrepriseMapper;
-import com.upf.stagiaire.model.Encadrant;
 import com.upf.stagiaire.model.Entreprise;
 import com.upf.stagiaire.service.EntrepriseService;
 import com.upf.stagiaire.util.HeaderUtil;

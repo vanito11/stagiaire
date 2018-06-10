@@ -16,7 +16,7 @@ public class DocumentBean implements Serializable  {
     private String description;
 
 
-    private Date dateSoumission;
+    private String dateSoumission;
 
 
     public Long getId() {
@@ -49,12 +49,12 @@ public class DocumentBean implements Serializable  {
     }
 
 
-    public Date getDateSoumission() {
+    public String getDateSoumission() {
         return dateSoumission;
     }
 
 
-    public void setDateSoumission(Date dateSoumission) {
+    public void setDateSoumission(String dateSoumission) {
         this.dateSoumission = dateSoumission;
     }
     

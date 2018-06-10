@@ -45,15 +45,13 @@ public class EncadrantResource {
 
 	@Autowired
 	private EncadrantService encadrantService;
-	
+	@Autowired
+	private StageService stageService;
+	@Autowired
+	private StagiaireService stagiaireService;
 	@Autowired
 	private EncadrantMapper encadrantMapper;
 
-	@Autowired
-	private StageService stageService;
-
-	@Autowired
-	private StagiaireService stagiaireService;
 
 
 	/**
@@ -136,7 +134,8 @@ public class EncadrantResource {
 		return encadrant;
 	}
 
-	@GetMapping("/encadrants/stages/{id}")
+	
+	 @GetMapping("/encadrants/stages/{id}")
 	public List<StageSatagiaireBean> getEncadrantstages(@PathVariable Long id) {
 		log.debug("REST request to get Encadrant : {}", id);
 

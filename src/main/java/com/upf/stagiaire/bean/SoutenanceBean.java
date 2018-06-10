@@ -11,7 +11,7 @@ public class SoutenanceBean implements Serializable {
  
     private Long id;
 
-    private Date dateSoutenance;
+    private String dateSoutenance;
 
     private Integer encadrant;
 
@@ -50,12 +50,12 @@ public class SoutenanceBean implements Serializable {
     }
 
 
-    public Date getDateSoutenance() {
+    public String getDateSoutenance() {
         return dateSoutenance;
     }
 
 
-    public void setDateSoutenance(Date dateSoutenance) {
+    public void setDateSoutenance(String dateSoutenance) {
         this.dateSoutenance = dateSoutenance;
     }
 

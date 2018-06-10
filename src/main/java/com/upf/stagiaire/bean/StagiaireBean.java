@@ -1,7 +1,7 @@
 package com.upf.stagiaire.bean;
 
 import java.io.Serializable;
-import java.util.Date;
+
 
 import com.upf.stagiaire.model.Filiere;
 

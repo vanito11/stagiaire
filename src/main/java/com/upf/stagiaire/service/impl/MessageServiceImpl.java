@@ -61,6 +61,13 @@ public class MessageServiceImpl implements MessageService {
         log.debug("Request to get Message : {}", id);
         return messageRepository.findOne(id);
     }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public List<Message> findMessageByStageId(Long id) {
+        log.debug("Request to get Message : {}", id);
+        return messageRepository.findMessageByStageId(id);
+    }
 
     /**
      * Delete the message by id.

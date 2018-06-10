@@ -38,4 +38,6 @@ public interface SoutenanceService {
      * @param id the id of the entity
      */
     void delete(Long id);
+    
+    List<Soutenance> findSoutenanceByStageId(Long id);
 }

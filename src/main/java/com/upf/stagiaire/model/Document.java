@@ -32,7 +32,7 @@ public class Document implements Serializable {
     private String description;
 
     @Column(name = "date_soumission")
-    private Date dateSoumission;
+    private String  dateSoumission;
 
     @ManyToOne
     private Stage stage;
@@ -75,16 +75,16 @@ public class Document implements Serializable {
         this.description = description;
     }
 
-    public Date getDateSoumission() {
+    public String getDateSoumission() {
         return dateSoumission;
     }
 
-    public Document dateSoumission(Date dateSoumission) {
+    public Document dateSoumission(String dateSoumission) {
         this.dateSoumission = dateSoumission;
         return this;
     }
 
-    public void setDateSoumission(Date dateSoumission) {
+    public void setDateSoumission(String dateSoumission) {
         this.dateSoumission = dateSoumission;
     }
 

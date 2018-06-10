@@ -20,7 +20,7 @@ public class Soutenance implements Serializable {
     private Long id;
 
     @Column(name = "date_soutenance")
-    private Date dateSoutenance;
+    private String dateSoutenance;
 
     @Column(name = "encadrant")
     private Integer encadrant;
@@ -64,16 +64,16 @@ public class Soutenance implements Serializable {
         this.id = id;
     }
 
-    public Date getDateSoutenance() {
+    public String getDateSoutenance() {
         return dateSoutenance;
     }
 
-    public Soutenance dateSoutenance(Date dateSoutenance) {
+    public Soutenance dateSoutenance(String dateSoutenance) {
         this.dateSoutenance = dateSoutenance;
         return this;
     }
 
-    public void setDateSoutenance(Date dateSoutenance) {
+    public void setDateSoutenance(String dateSoutenance) {
         this.dateSoutenance = dateSoutenance;
     }
 

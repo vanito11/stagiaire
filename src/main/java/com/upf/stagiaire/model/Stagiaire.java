@@ -21,6 +21,7 @@ import javax.persistence.Table;
 /**
  * A Stagiaire.
  */
+
 @Entity
 @Table(name = "stagiaire")
 public class Stagiaire implements Serializable {

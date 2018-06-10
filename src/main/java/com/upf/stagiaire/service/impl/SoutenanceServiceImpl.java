@@ -1,6 +1,9 @@
 package com.upf.stagiaire.service.impl;
 
 import com.upf.stagiaire.service.SoutenanceService;
+
+
+
 import com.upf.stagiaire.model.Soutenance;
 import com.upf.stagiaire.repository.SoutenanceRepository;
 import org.slf4j.Logger;
@@ -61,6 +64,14 @@ public class SoutenanceServiceImpl implements SoutenanceService {
         log.debug("Request to get Soutenance : {}", id);
         return soutenanceRepository.findOne(id);
     }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public List<Soutenance> findSoutenanceByStageId(Long id) {
+        log.debug("Request to get SeanceEncadrement : {}", id);
+        return soutenanceRepository.findSoutenanceByStageId(id);
+    }
+
 
     /**
      * Delete the soutenance by id.

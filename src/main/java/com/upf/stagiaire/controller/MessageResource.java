@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,8 +33,8 @@ public class MessageResource {
     private final Logger log = LoggerFactory.getLogger(MessageResource.class);
     
     private static final String ENTITY_NAME = "message";
-    
-    private final MessageService messageService;
+    @Autowired
+    private MessageService messageService;
     
     public MessageResource(MessageService messageService) {
         this.messageService = messageService;
@@ -113,7 +113,14 @@ public class MessageResource {
         Message message = messageService.findOne(id);
         return message;
     }
-    
+    @GetMapping("/stages/messages/{id}")
+    @Timed
+    public List<Message> getMessageStageById(@PathVariable Long id) {
+        log.debug("REST request to get Message : {}", id);
+        List<Message> message = messageService.findMessageByStageId(id);
+
+        return message;
+    }
     /**
      * DELETE /messages/:id : delete the "id" message.
      *

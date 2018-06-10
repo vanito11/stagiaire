@@ -38,4 +38,6 @@ public interface VisiteService {
      * @param id the id of the entity
      */
     void delete(Long id);
+    
+    List<Visite> findVisiteByStageId(Long id);
 }
