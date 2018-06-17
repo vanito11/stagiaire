@@ -40,4 +40,5 @@ public interface SoutenanceService {
     void delete(Long id);
     
     List<Soutenance> findSoutenanceByStageId(Long id);
+    void deleteSoutenanceByStageId(Long id);
 }

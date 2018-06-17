@@ -85,7 +85,12 @@ public class EtatResource {
                 .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, etat.getId().toString()))
                 .body(result);
     }
-    
+    @PutMapping("/etats/update/{id}")
+	public void updateEtats(@PathVariable Long id, @RequestBody Etat request) throws URISyntaxException {
+
+    	etatService.save(request);
+
+	}
     /**
      * GET /etats : get all the etats.
      *

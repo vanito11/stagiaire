@@ -38,4 +38,6 @@ public interface DateService {
      * @param id the id of the entity
      */
     void delete(Long id);
+    List<Date> findDateByStageId(Long id);
+    void deleteDateByStageId(Long id);
 }

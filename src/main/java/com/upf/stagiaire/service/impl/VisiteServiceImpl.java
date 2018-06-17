@@ -68,6 +68,14 @@ public class VisiteServiceImpl implements VisiteService {
         log.debug("Request to get Visite : {}", id);
         return visiteRepository.findVisiteByStageId(id);
     }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public void deleteVisiteByStageId(Long id) {
+        log.debug("Request to get Visite : {}", id);
+        visiteRepository.deleteVisiteByStageId(id);
+    }
+
 
     /**
      * Delete the visite by id.

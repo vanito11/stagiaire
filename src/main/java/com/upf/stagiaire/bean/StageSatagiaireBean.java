@@ -5,6 +5,7 @@ package com.upf.stagiaire.bean;
 import java.util.List;
 
 import com.upf.stagiaire.model.Stage;
+import com.upf.stagiaire.model.StageStagiaire;
 import com.upf.stagiaire.model.Stagiaire;
 
 public class StageSatagiaireBean {
@@ -13,7 +14,19 @@ public class StageSatagiaireBean {
 
 	private Stage stageBean;
 
-	private List<Stagiaire> stagiaireBean;
+	private Stagiaire stagiaireBean;
+	
+	private StageStagiaire stageStagiaire;
+
+
+	
+	public StageStagiaire getStageStagiaire() {
+	return stageStagiaire;
+}
+
+public void setStageStagiaire(StageStagiaire stageStagiaire) {
+	this.stageStagiaire = stageStagiaire;
+}
 
 	public Long getId() {
 		return id;
@@ -31,11 +44,11 @@ public class StageSatagiaireBean {
 		this.stageBean = stageBean;
 	}
 
-	public List<Stagiaire> getStagiaireBean() {
+	public Stagiaire getStagiaireBean() {
 		return stagiaireBean;
 	}
 
-	public void setStagiaireBean(List<Stagiaire> stagiaireBean) {
+	public void setStagiaireBean(Stagiaire stagiaireBean) {
 		this.stagiaireBean = stagiaireBean;
 	}
 

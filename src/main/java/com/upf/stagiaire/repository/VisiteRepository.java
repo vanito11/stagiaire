@@ -18,5 +18,6 @@ import org.springframework.data.jpa.repository.*;
 public interface VisiteRepository extends JpaRepository<Visite, Long> {
 	
 	   List<Visite> findVisiteByStageId(Long id);
+	   void deleteVisiteByStageId(Long id);
 
 }

@@ -3,6 +3,9 @@ package com.upf.stagiaire.repository;
 import org.springframework.stereotype.Repository;
 
 import com.upf.stagiaire.model.Date;
+import com.upf.stagiaire.model.Document;
+
+import java.util.List;
 
 import org.springframework.data.jpa.repository.*;
 
@@ -14,4 +17,7 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface DateRepository extends JpaRepository<Date, Long> {
 
+	
+	 List<Date> findDateByStageId(Long id);
+	 void deleteDateByStageId(Long id);
 }

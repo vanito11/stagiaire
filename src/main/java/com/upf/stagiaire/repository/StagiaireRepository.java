@@ -18,7 +18,7 @@ import com.upf.stagiaire.model.Stagiaire;
 @Repository
 public interface StagiaireRepository extends JpaRepository<Stagiaire, Long> {
 	
-	List<Stagiaire> findByStageId(Long id);
+	Stagiaire findOneByStageId(Long id);
 
 
 

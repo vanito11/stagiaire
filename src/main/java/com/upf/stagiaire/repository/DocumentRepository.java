@@ -19,5 +19,6 @@ public interface DocumentRepository extends JpaRepository<Document, Long> {
 	
 	
 	   List<Document> findDocumentByStageId(Long id);
+	   void deleteDocumentByStageId(Long id);
 
 }

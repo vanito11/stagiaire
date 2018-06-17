@@ -4,6 +4,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,10 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
+import com.upf.stagiaire.bean.FiliereBean;
 import com.upf.stagiaire.bean.StageSatagiaireBean;
 import com.upf.stagiaire.exception.BadRequestAlertException;
+import com.upf.stagiaire.model.Filiere;
 import com.upf.stagiaire.model.Stage;
 import com.upf.stagiaire.service.StageService;
+import com.upf.stagiaire.service.StageStagiaireService;
 import com.upf.stagiaire.service.StagiaireService;
 import com.upf.stagiaire.util.HeaderUtil;
 
@@ -41,6 +45,8 @@ public class StageResource {
     private StageService stageService;
     @Autowired
     private StagiaireService stagiaireService;
+    @Autowired
+    private StageStagiaireService stageStagiaireService;
     
     public StageResource(StageService stageService) {
         this.stageService = stageService;
@@ -60,9 +66,13 @@ public class StageResource {
     @Timed
     public ResponseEntity<Stage> createStage(@RequestBody Stage stage) throws URISyntaxException {
         log.debug("REST request to save Stage : {}", stage);
-        if (stage.getId() != null) {
+    /*    
+        Random rn = new Random();
+        Long answer = rn.nextLong();
+        stage.setId(answer);
+        if (stage.getId() == null) {
             throw new BadRequestAlertException("A new stage cannot already have an ID", ENTITY_NAME, "idexists");
-        }
+        }*/
         Stage result = stageService.save(stage);
         return ResponseEntity.created(new URI("/api/stages/" + result.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -92,6 +102,13 @@ public class StageResource {
                 .body(result);
     }
     
+    
+    @PutMapping("/stages/update/{id}")
+	public void updateStage(@PathVariable Long id, @RequestBody Stage request) throws URISyntaxException {
+
+				stageService.save(request);
+
+	}
     /**
      * GET /stages : get all the stages.
      *
@@ -132,7 +149,7 @@ public class StageResource {
 		List<Stage> stages = stageService.findAll();
 		for (Stage st : stages) {
 			StageSatagiaireBean newS = new StageSatagiaireBean();
-			newS.setStagiaireBean(stagiaireService.findByStageId(st.getId()));
+			newS.setStagiaireBean(stagiaireService.findOneByStageId(st.getId()));
 			newS.setStageBean(st);
 			response.add(newS);
 		}

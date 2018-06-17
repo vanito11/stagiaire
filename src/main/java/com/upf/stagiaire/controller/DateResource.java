@@ -2,10 +2,12 @@ package com.upf.stagiaire.controller;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codahale.metrics.annotation.Timed;
 import com.upf.stagiaire.exception.BadRequestAlertException;
 import com.upf.stagiaire.model.Date;
+import com.upf.stagiaire.model.Document;
 import com.upf.stagiaire.service.DateService;
+import com.upf.stagiaire.service.StageService;
 import com.upf.stagiaire.util.HeaderUtil;
 
 /**
@@ -34,7 +38,10 @@ public class DateResource {
     
     private static final String ENTITY_NAME = "date";
     
-    private final DateService dateService;
+    @Autowired
+    private DateService dateService;
+
+    private List<Date> date;
     
     public DateResource(DateService dateService) {
         this.dateService = dateService;
@@ -86,6 +93,15 @@ public class DateResource {
                 .body(result);
     }
     
+    @PutMapping("/dates/update/{id}")
+	public void updateDates(@PathVariable Long id, @RequestBody Date request) throws URISyntaxException {
+
+    	dateService.save(request);
+		
+
+
+	}
+    
     /**
      * GET /dates : get all the dates.
      *
@@ -97,7 +113,13 @@ public class DateResource {
         log.debug("REST request to get all Dates");
         return dateService.findAll();
     }
-    
+    @GetMapping("/stages/dates/{id}")
+    @Timed
+    public List<Date> getDatesStageById(@PathVariable Long id) {
+        log.debug("REST request to get Date : {}", id);
+        date = dateService.findDateByStageId(id);
+        return date;
+    }
     /**
      * GET /dates/:id : get the "id" date.
      *
@@ -126,5 +148,8 @@ public class DateResource {
         log.debug("REST request to delete Date : {}", id);
         dateService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
-    }
+    }   
+    
+ 
+
 }

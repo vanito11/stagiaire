@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 import com.upf.stagiaire.exception.BadRequestAlertException;
+import com.upf.stagiaire.model.Type;
 import com.upf.stagiaire.model.TypeSoutenance;
 import com.upf.stagiaire.service.TypeSoutenanceService;
 import com.upf.stagiaire.util.HeaderUtil;
@@ -41,7 +42,7 @@ public class TypeSoutenanceResource {
     }
     
     /**
-     * POST /type-soutenances : Create a new typeSoutenance.
+     * POST /typesoutenances : Create a new typeSoutenance.
      *
      * @param typeSoutenance
      *            the typeSoutenance to create
@@ -50,7 +51,7 @@ public class TypeSoutenanceResource {
      * @throws URISyntaxException
      *             if the Location URI syntax is incorrect
      */
-    @PostMapping("/type-soutenances")
+    @PostMapping("/typesoutenances")
     @Timed
     public ResponseEntity<TypeSoutenance> createTypeSoutenance(@RequestBody TypeSoutenance typeSoutenance)
         throws URISyntaxException {
@@ -60,13 +61,13 @@ public class TypeSoutenanceResource {
                     "idexists");
         }
         TypeSoutenance result = typeSoutenanceService.save(typeSoutenance);
-        return ResponseEntity.created(new URI("/api/type-soutenances/" + result.getId()))
+        return ResponseEntity.created(new URI("/api/typesoutenances/" + result.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
                 .body(result);
     }
     
     /**
-     * PUT /type-soutenances : Updates an existing typeSoutenance.
+     * PUT /typesoutenances : Updates an existing typeSoutenance.
      *
      * @param typeSoutenance
      *            the typeSoutenance to update
@@ -76,7 +77,7 @@ public class TypeSoutenanceResource {
      * @throws URISyntaxException
      *             if the Location URI syntax is incorrect
      */
-    @PutMapping("/type-soutenances")
+    @PutMapping("/typesoutenances")
     @Timed
     public ResponseEntity<TypeSoutenance> updateTypeSoutenance(@RequestBody TypeSoutenance typeSoutenance)
         throws URISyntaxException {
@@ -89,13 +90,18 @@ public class TypeSoutenanceResource {
                 .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, typeSoutenance.getId().toString()))
                 .body(result);
     }
-    
+    @PutMapping("/typesoutenances/update/{id}")
+	public void updateType(@PathVariable Long id, @RequestBody TypeSoutenance request) throws URISyntaxException {
+
+    	typeSoutenanceService.save(request);
+
+	}
     /**
-     * GET /type-soutenances : get all the typeSoutenances.
+     * GET /typesoutenances : get all the typeSoutenances.
      *
      * @return the ResponseEntity with status 200 (OK) and the list of typeSoutenances in body
      */
-    @GetMapping("/type-soutenances")
+    @GetMapping("/typesoutenances")
     @Timed
     public List<TypeSoutenance> getAllTypeSoutenances() {
         log.debug("REST request to get all TypeSoutenances");
@@ -103,13 +109,13 @@ public class TypeSoutenanceResource {
     }
     
     /**
-     * GET /type-soutenances/:id : get the "id" typeSoutenance.
+     * GET /typesoutenances/:id : get the "id" typeSoutenance.
      *
      * @param id
      *            the id of the typeSoutenance to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the typeSoutenance, or with status 404 (Not Found)
      */
-    @GetMapping("/type-soutenances/{id}")
+    @GetMapping("/typesoutenances/{id}")
     @Timed
     public TypeSoutenance getTypeSoutenance(@PathVariable Long id) {
         log.debug("REST request to get TypeSoutenance : {}", id);
@@ -118,13 +124,13 @@ public class TypeSoutenanceResource {
     }
     
     /**
-     * DELETE /type-soutenances/:id : delete the "id" typeSoutenance.
+     * DELETE /typesoutenances/:id : delete the "id" typeSoutenance.
      *
      * @param id
      *            the id of the typeSoutenance to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/type-soutenances/{id}")
+    @DeleteMapping("/typesoutenances/{id}")
     @Timed
     public ResponseEntity<Void> deleteTypeSoutenance(@PathVariable Long id) {
         log.debug("REST request to delete TypeSoutenance : {}", id);

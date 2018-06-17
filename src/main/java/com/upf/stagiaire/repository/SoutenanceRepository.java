@@ -22,5 +22,6 @@ public interface SoutenanceRepository extends JpaRepository<Soutenance, Long> {
    
    
    List<Soutenance> findSoutenanceByStageId(Long id);
+   void deleteSoutenanceByStageId(Long id);
 
 }

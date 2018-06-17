@@ -71,7 +71,12 @@ public class SoutenanceServiceImpl implements SoutenanceService {
         log.debug("Request to get SeanceEncadrement : {}", id);
         return soutenanceRepository.findSoutenanceByStageId(id);
     }
-
+    @Override
+    @Transactional(readOnly = true)
+    public void deleteSoutenanceByStageId(Long id) {
+        log.debug("Request to get SeanceEncadrement : {}", id);
+        soutenanceRepository.deleteSoutenanceByStageId(id);
+    }
 
     /**
      * Delete the soutenance by id.

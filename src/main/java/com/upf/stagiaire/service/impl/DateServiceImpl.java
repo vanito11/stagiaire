@@ -49,6 +49,11 @@ public class DateServiceImpl implements DateService {
         return dateRepository.findAll();
     }
 
+    
+    public List<Date> findDateByStageId(Long id) {
+        log.debug("Request to get all Dates");
+        return dateRepository.findDateByStageId(id);
+    }
     /**
      * Get one date by id.
      *
@@ -72,4 +77,10 @@ public class DateServiceImpl implements DateService {
         log.debug("Request to delete Date : {}", id);
         dateRepository.delete(id);
     }
+    @Override
+    public void deleteDateByStageId(Long id) {
+        log.debug("Request to delete Date : {}", id);
+        dateRepository.deleteDateByStageId(id);
+    }
+    
 }

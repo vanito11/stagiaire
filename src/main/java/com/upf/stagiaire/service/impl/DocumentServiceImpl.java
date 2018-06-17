@@ -68,6 +68,13 @@ public class DocumentServiceImpl implements DocumentService {
         log.debug("Request to get Document : {}", id);
         return documentRepository.findDocumentByStageId(id);
     }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public void deleteDocumentByStageId(Long id) {
+        log.debug("Request to get Document : {}", id);
+        documentRepository.deleteDocumentByStageId(id);
+    }
     /**
      * Delete the document by id.
      *

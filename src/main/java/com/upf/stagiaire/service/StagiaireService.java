@@ -43,7 +43,7 @@ public interface StagiaireService {
 
     Stagiaire signupStagaiare(UserRequest userRequest);
 
-    List<Stagiaire> findByStageId(Long id);
+    Stagiaire findOneByStageId(Long id);
 	
 
 	

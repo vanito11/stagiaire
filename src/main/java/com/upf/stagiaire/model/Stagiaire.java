@@ -29,7 +29,7 @@ public class Stagiaire implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(name = "nom")
@@ -67,9 +67,9 @@ public class Stagiaire implements Serializable {
 
 	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(name = "stagestagiaire", 
-	    joinColumns = { @JoinColumn(name = "stagiaire_id",referencedColumnName = "id") }, 
+	    joinColumns = { @JoinColumn(name = "stagiaireid",referencedColumnName = "id") }, 
 	    inverseJoinColumns = {
-		@JoinColumn(name = "stage_id",referencedColumnName = "id") })
+		@JoinColumn(name = "stageid",referencedColumnName = "id") })
 	private Set<Stage> stage = new HashSet<>();
 
 	public Long getId() {

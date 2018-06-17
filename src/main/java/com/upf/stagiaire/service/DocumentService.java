@@ -40,4 +40,5 @@ public interface DocumentService {
     void delete(Long id);
     
     List<Document> findDocumentByStageId(Long id);
+    void deleteDocumentByStageId(Long id);
 }

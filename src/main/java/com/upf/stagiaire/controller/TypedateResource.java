@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 import com.upf.stagiaire.exception.BadRequestAlertException;
+import com.upf.stagiaire.model.TypeSoutenance;
 import com.upf.stagiaire.model.Typedate;
 import com.upf.stagiaire.service.TypedateService;
 import com.upf.stagiaire.util.HeaderUtil;
@@ -86,6 +87,13 @@ public class TypedateResource {
                 .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, typedate.getId().toString()))
                 .body(result);
     }
+    
+    @PutMapping("/typedates/update/{id}")
+	public void updateType(@PathVariable Long id, @RequestBody Typedate request) throws URISyntaxException {
+
+    	typedateService.save(request);
+
+	}
     
     /**
      * GET /typedates : get all the typedates.

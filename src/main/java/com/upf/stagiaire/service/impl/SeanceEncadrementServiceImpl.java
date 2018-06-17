@@ -68,6 +68,13 @@ public class SeanceEncadrementServiceImpl implements SeanceEncadrementService {
         log.debug("Request to get SeanceEncadrement : {}", id);
         return seanceEncadrementRepository.findSeanceEncadrementByStageId(id);
     }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public void deleteSeanceEncadrementByStageId(Long id) {
+        log.debug("Request to get SeanceEncadrement : {}", id);
+        seanceEncadrementRepository.deleteSeanceEncadrementByStageId(id);
+    }
 
     /**
      * Delete the seanceEncadrement by id.

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 import com.upf.stagiaire.exception.BadRequestAlertException;
+import com.upf.stagiaire.model.Type;
 import com.upf.stagiaire.model.TypeDocument;
 import com.upf.stagiaire.service.TypeDocumentService;
 import com.upf.stagiaire.util.HeaderUtil;
@@ -41,7 +42,7 @@ public class TypeDocumentResource {
     }
     
     /**
-     * POST /type-documents : Create a new typeDocument.
+     * POST /typedocuments : Create a new typeDocument.
      *
      * @param typeDocument
      *            the typeDocument to create
@@ -50,7 +51,7 @@ public class TypeDocumentResource {
      * @throws URISyntaxException
      *             if the Location URI syntax is incorrect
      */
-    @PostMapping("/type-documents")
+    @PostMapping("/typedocuments")
     @Timed
     public ResponseEntity<TypeDocument> createTypeDocument(@RequestBody TypeDocument typeDocument)
         throws URISyntaxException {
@@ -59,13 +60,13 @@ public class TypeDocumentResource {
             throw new BadRequestAlertException("A new typeDocument cannot already have an ID", ENTITY_NAME, "idexists");
         }
         TypeDocument result = typeDocumentService.save(typeDocument);
-        return ResponseEntity.created(new URI("/api/type-documents/" + result.getId()))
+        return ResponseEntity.created(new URI("/api/typedocuments/" + result.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
                 .body(result);
     }
     
     /**
-     * PUT /type-documents : Updates an existing typeDocument.
+     * PUT /typedocuments : Updates an existing typeDocument.
      *
      * @param typeDocument
      *            the typeDocument to update
@@ -75,7 +76,7 @@ public class TypeDocumentResource {
      * @throws URISyntaxException
      *             if the Location URI syntax is incorrect
      */
-    @PutMapping("/type-documents")
+    @PutMapping("/typedocuments")
     @Timed
     public ResponseEntity<TypeDocument> updateTypeDocument(@RequestBody TypeDocument typeDocument)
         throws URISyntaxException {
@@ -88,13 +89,18 @@ public class TypeDocumentResource {
                 .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, typeDocument.getId().toString()))
                 .body(result);
     }
-    
+    @PutMapping("/typedocuments/update/{id}")
+	public void updateTypeDocument(@PathVariable Long id, @RequestBody TypeDocument request) throws URISyntaxException {
+
+    	typeDocumentService.save(request);
+
+	}
     /**
-     * GET /type-documents : get all the typeDocuments.
+     * GET /typedocuments : get all the typeDocuments.
      *
      * @return the ResponseEntity with status 200 (OK) and the list of typeDocuments in body
      */
-    @GetMapping("/type-documents")
+    @GetMapping("/typedocuments")
     @Timed
     public List<TypeDocument> getAllTypeDocuments() {
         log.debug("REST request to get all TypeDocuments");
@@ -102,13 +108,13 @@ public class TypeDocumentResource {
     }
     
     /**
-     * GET /type-documents/:id : get the "id" typeDocument.
+     * GET /typedocuments/:id : get the "id" typeDocument.
      *
      * @param id
      *            the id of the typeDocument to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the typeDocument, or with status 404 (Not Found)
      */
-    @GetMapping("/type-documents/{id}")
+    @GetMapping("/typedocuments/{id}")
     @Timed
     public TypeDocument getTypeDocument(@PathVariable Long id) {
         log.debug("REST request to get TypeDocument : {}", id);
@@ -117,13 +123,13 @@ public class TypeDocumentResource {
     }
     
     /**
-     * DELETE /type-documents/:id : delete the "id" typeDocument.
+     * DELETE /typedocuments/:id : delete the "id" typeDocument.
      *
      * @param id
      *            the id of the typeDocument to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/type-documents/{id}")
+    @DeleteMapping("/typedocuments/{id}")
     @Timed
     public ResponseEntity<Void> deleteTypeDocument(@PathVariable Long id) {
         log.debug("REST request to delete TypeDocument : {}", id);

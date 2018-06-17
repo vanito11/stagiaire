@@ -17,5 +17,6 @@ import org.springframework.data.jpa.repository.*;
 public interface SeanceEncadrementRepository extends JpaRepository<SeanceEncadrement, Long> {
 	
 	List<SeanceEncadrement> findSeanceEncadrementByStageId(Long id);
+	void deleteSeanceEncadrementByStageId(Long id);
 
 }

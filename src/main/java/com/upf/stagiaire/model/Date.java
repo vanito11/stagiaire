@@ -20,7 +20,7 @@ public class Date implements Serializable {
     private Long id;
 
     @Column(name = "jhi_date")
-    private Date date;
+    private String date;
 
     @ManyToOne
     private Stage stage;
@@ -33,51 +33,37 @@ public class Date implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public Date date(Date date) {
-        this.date = date;
-        return this;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Stage getStage() {
-        return stage;
-    }
-
-    public Date stage(Stage stage) {
-        this.stage = stage;
-        return this;
-    }
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
-    public Typedate getTypedate() {
-        return typedate;
-    }
-
-    public Date typedate(Typedate typedate) {
-        this.typedate = typedate;
-        return this;
-    }
-
-    public void setTypedate(Typedate typedate) {
-        this.typedate = typedate;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
-    @Override
+    public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public Stage getStage() {
+		return stage;
+	}
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
+	}
+
+	public Typedate getTypedate() {
+		return typedate;
+	}
+
+	public void setTypedate(Typedate typedate) {
+		this.typedate = typedate;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

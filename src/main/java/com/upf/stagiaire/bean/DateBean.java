@@ -12,7 +12,7 @@ public class DateBean implements Serializable  {
     private Long id;
 
 
-    private Date date;
+    private String date;
 
 
     public Long getId() {
@@ -25,12 +25,12 @@ public class DateBean implements Serializable  {
     }
 
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

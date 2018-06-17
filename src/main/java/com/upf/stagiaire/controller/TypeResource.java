@@ -81,6 +81,12 @@ public class TypeResource {
             .body(result);
     }
 
+    @PutMapping("/types/update/{id}")
+	public void updateType(@PathVariable Long id, @RequestBody Type request) throws URISyntaxException {
+
+    	typeService.save(request);
+
+	}
     /**
      * GET  /types : get all the types.
      *

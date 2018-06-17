@@ -38,5 +38,6 @@ public interface SeanceEncadrementService {
      * @param id the id of the entity
      */
     void delete(Long id);
-   List<SeanceEncadrement> findSeanceEncadrementByStageId(Long id);
+    List<SeanceEncadrement> findSeanceEncadrementByStageId(Long id);
+    void deleteSeanceEncadrementByStageId(Long id);
 }

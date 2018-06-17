@@ -39,5 +39,7 @@ public interface VisiteService {
      */
     void delete(Long id);
     
+    
     List<Visite> findVisiteByStageId(Long id);
+    void deleteVisiteByStageId(Long id);
 }

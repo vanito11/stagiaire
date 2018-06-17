@@ -144,7 +144,7 @@ public class EncadrantResource {
 		List<Stage> stages = stageService.findStageByEncadrantId(id);
 		for (Stage st : stages) {
 			StageSatagiaireBean newS = new StageSatagiaireBean();
-			newS.setStagiaireBean(stagiaireService.findByStageId(st.getId()));
+			newS.setStagiaireBean(stagiaireService.findOneByStageId(st.getId()));
 			newS.setStageBean(st);
 			response.add(newS);
 		}
